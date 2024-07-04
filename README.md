@@ -4,33 +4,31 @@ Ce projet est une simulation interactive d'un système solaire basée sur Rust, 
 
 ## Fonctionnalités
 
-    - Simulation du Système Solaire : Les planètes (Mercure, Venus, Terre, Mars, Jupiter, Saturne, Uranus, Neptune) sont représentées avec leurs propriétés orbitales telles que la distance au soleil, la vitesse orbitale et leurs lunes respectives.
-    - Interactivité : Utilisation des touches directionnelles pour déplacer la caméra à travers le système solaire. Les touches Z et S permettent de zoomer et dézoomer pour explorer le système à différentes échelles.
-    - Affichage Graphique : Utilisation de primitives graphiques pour dessiner les planètes, leurs orbites, les lunes, ainsi que leurs noms.
-    - Modularité : Le code est structuré avec des structures (structs) pour représenter les planètes, les lunes et le système solaire, avec des méthodes pour la mise à jour de la simulation et le rendu graphique.
+- Simulation du Système Solaire : Les planètes (Mercure, Venus, Terre, Mars, Jupiter, Saturne, Uranus, Neptune) sont représentées avec leurs propriétés orbitales telles que la distance au soleil, la vitesse orbitale et leurs lunes respectives.
+- Interactivité : Utilisation des touches directionnelles pour déplacer la caméra à travers le système solaire. Les touches Z et S permettent de zoomer et dézoomer pour explorer le système à différentes échelles.
+- Affichage Graphique : Utilisation de primitives graphiques pour dessiner les planètes, leurs orbites, les lunes, ainsi que leurs noms.
+- Modularité : Le code est structuré avec des structures (structs) pour représenter les planètes, les lunes et le système solaire, avec des méthodes pour la mise à jour de la simulation et le rendu graphique.
 
 ## Prérequis
 
-    Rust 1.0 ou supérieur
-    Cargo (le gestionnaire de paquets de Rust)
+- Rust 1.0 ou supérieur
+- Cargo (le gestionnaire de paquets de Rust)
 
 ## Installation
 
  1) Clonez ce repository :
 
-git clone https://github.com/votre_utilisateur/systeme-solaire-rust.git
+    git clone https://github.com/votre_utilisateur/systeme-solaire-rust.git
 
  2) Déplacez-vous dans le répertoire du projet :
 
-cd systeme-solaire-rust
+    cd systeme-solaire-rust
 
  3) Compilez et lancez le projet avec Cargo :
-
-
 
     cargo run --release
 
 ## Contrôles
 
-    - Utilisez les touches fléchées (Up, Down, Left, Right) pour déplacer la caméra.
-    - Utilisez les touches Z pour zoomer et S pour dézoomer.
+- Utilisez les touches fléchées (Up, Down, Left, Right) pour déplacer la caméra.
+- Utilisez les touches Z pour zoomer et S pour dézoomer.
