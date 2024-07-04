@@ -5,3 +5,4 @@ edition = "2021"
 
 [dependencies]
 ggez = "0.7.0"
+nalgebra = "0.29"
