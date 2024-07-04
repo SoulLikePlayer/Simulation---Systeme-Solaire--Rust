@@ -1,5 +1,6 @@
 // src/main.rs
 
+use ggez::*;
 use std::f64::consts::PI;
 
 struct Planete {
@@ -7,6 +8,7 @@ struct Planete {
     distance: f64,
     vitesse: f64,
     angle: f64,
+    rayon: f64,
 }
 
 struct SystemeSolaire {
@@ -22,24 +24,28 @@ impl SystemeSolaire {
                     distance: 57.9,
                     vitesse: 47.4,
                     angle: 0.0,
+                    rayon: 2.0,
                 },
                 Planete {
                     nom: "Venus".to_string(),
                     distance: 108.2,
                     vitesse: 35.0,
                     angle: 0.0,
+                    rayon: 3.0,
                 },
                 Planete {
                     nom: "Terre".to_string(),
                     distance: 149.6,
                     vitesse: 29.8,
                     angle: 0.0,
+                    rayon: 4.0,
                 },
                 Planete {
                     nom: "Mars".to_string(),
                     distance: 227.9,
                     vitesse: 24.1,
                     angle: 0.0,
+                    rayon: 3.5,
                 },
             ],
         }
@@ -52,20 +58,46 @@ impl SystemeSolaire {
         }
     }
 
-    fn afficher(&self) {
+    fn dessiner(&self, ctx: &mut Context) -> GameResult {
+        graphics::clear(ctx, graphics::WHITE);
         for planete in &self.planetes {
-            println!(
-                "Planète: {}, Distance: {} millions de km, Vitesse: {} km/s, Angle: {} radians",
-                planete.nom, planete.distance, planete.vitesse, planete.angle
-            );
+            let x = 400.0 + planete.distance as f32 * planete.angle.cos() as f32;
+            let y = 300.0 + planete.distance as f32 * planete.angle.sin() as f32;
+            let cercle = graphics::Mesh::new_circle(
+                ctx,
+                graphics::DrawMode::fill(),
+                [x, y],
+                planete.rayon,
+                0.1,
+                graphics::BLACK,
+            )?;
+            graphics::draw(ctx, &cercle, graphics::DrawParam::default())?;
         }
+        graphics::present(ctx)
     }
 }
 
-fn main() {
-    let mut systeme_solaire = SystemeSolaire::new();
-    systeme_solaire.afficher();
-    systeme_solaire.mettre_a_jour(1.0);
-    println!("\nAprès 1 seconde :");
-    systeme_solaire.afficher();
+struct Jeu {
+    systeme_solaire: SystemeSolaire,
+}
+
+impl event::EventHandler for Jeu {
+    fn update(&mut self, _ctx: &mut Context) -> GameResult {
+        self.systeme_solaire.mettre_a_jour(0.1);
+        Ok(())
+    }
+
+    fn draw(&mut self, ctx: &mut Context) -> GameResult {
+        self.systeme_solaire.dessiner(ctx)
+    }
+}
+
+fn main() -> GameResult {
+    let (mut ctx, mut event_loop) = ContextBuilder::new("Systeme Solaire", "Auteur")
+        .build()
+        .expect("Erreur lors de la création du contexte");
+    let jeu = Jeu {
+        systeme_solaire: SystemeSolaire::new(),
+    };
+    event::run(&mut ctx, &mut event_loop, &mut jeu)
 }
