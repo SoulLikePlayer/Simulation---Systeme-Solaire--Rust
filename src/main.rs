@@ -1,5 +1,3 @@
-// src/main.rs
-
 use ggez::*;
 use std::f64::consts::PI;
 
@@ -59,7 +57,7 @@ impl SystemeSolaire {
     }
 
     fn dessiner(&self, ctx: &mut Context) -> GameResult {
-        graphics::clear(ctx, graphics::WHITE);
+        graphics::clear(ctx, graphics::Color::WHITE);
         for planete in &self.planetes {
             let x = 400.0 + planete.distance as f32 * planete.angle.cos() as f32;
             let y = 300.0 + planete.distance as f32 * planete.angle.sin() as f32;
@@ -67,9 +65,9 @@ impl SystemeSolaire {
                 ctx,
                 graphics::DrawMode::fill(),
                 [x, y],
-                planete.rayon,
+                planete.rayon as f32,
                 0.1,
-                graphics::BLACK,
+                graphics::Color::BLACK,
             )?;
             graphics::draw(ctx, &cercle, graphics::DrawParam::default())?;
         }
@@ -93,11 +91,11 @@ impl event::EventHandler for Jeu {
 }
 
 fn main() -> GameResult {
-    let (mut ctx, mut event_loop) = ContextBuilder::new("Systeme Solaire", "Auteur")
+    let (ctx, event_loop) = ContextBuilder::new("Systeme Solaire", "Auteur")
         .build()
         .expect("Erreur lors de la création du contexte");
     let jeu = Jeu {
         systeme_solaire: SystemeSolaire::new(),
     };
-    event::run(&mut ctx, &mut event_loop, &mut jeu)
+    event::run(ctx, event_loop, jeu)
 }
