@@ -1,8 +1,8 @@
 [package]
-name = "system_solaire"
+name = "systeme_solaire"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-ggez = "0.7.0"
-nalgebra = "0.29"
+ggez = "0.7.1"
+nalgebra = "0.29.0"
